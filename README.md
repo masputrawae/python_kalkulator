@@ -1,8 +1,8 @@
 # Kalkulator
 
-**Tujuan**: Kalkulator sederhana yang saya buat sebagai praktik belajar pemrograman di Python
+**Tujuan**: Kalkulator sederhana yang saya buat sebagai praktik belajar pemrograman di Python.
 **Bahasa**: Python
-**Repo**: 
+**Repo**: https://github.com/masputrawae/python_kalkulator
 **Versi**: 1.0.0
 
 ---
