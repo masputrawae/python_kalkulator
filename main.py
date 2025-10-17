@@ -8,29 +8,29 @@ def calculator(a, b, op):
     except ValueError:
         return "\n!Input must be a Number"
 
-    result = 0
+    if op in ("/", "//", "%") and last_num == 0:
+        return "\n!Can't be divided by 0"
 
-    if op == "+":
-        result = first_num + last_num
-    elif op == "-":
-        result = first_num - last_num
-    elif op == "*":
-        result = first_num * last_num
-    elif op == "/":
-        if last_num == 0:
-            return "\n!Cannot be divided by 0"
-        else:
-            result = first_num / last_num
-    else:
-        return "\n!The selected operation is not available"
+    operations = {
+        "+": lambda x, y: x + y,
+        "-": lambda x, y: x - y,
+        "*": lambda x, y: x * y,
+        "/": lambda x, y: x / y,
+        "%": lambda x, y: x % y,
+        "//": lambda x, y: x // y
+    }
+
+    result = operations.get(op, lambda x, y: "\n!Unknown operator")(first_num, last_num)
     
-    return f"\nResult: {first_num} {op} {last_num} = {cln_num(result)}"
+    if isinstance(result, (int, float)):
+        return f"\nResult: {first_num} {op} {last_num} = {cln_num(result)}"
+    return result
 
 def main():
     print("=== Python Kalkulator ===")
     a = input("First Number: ")
     b = input("Last Number: ")
-    op = input("Select Operation (+, -, *, /): ")
+    op = input("Select Operation (+, -, *, /, //, %): ")
 
     result = calculator(a, b, op)
     print(result)
@@ -38,6 +38,8 @@ def main():
 if __name__ == "__main__":
     try:
         main()
+    except KeyboardInterrupt:
+        print("\n!Goodbye...")
     except Exception as e:
         print("\n!Error: ", e)
 
