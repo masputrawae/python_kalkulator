@@ -1,3 +1,11 @@
+import os
+
+def cln_screen():
+    if os.name == "posix":
+        os.system("clear")
+    elif os.name == "nt":
+        os.system("cls")
+
 def cln_num(x):
     return int(x) if x.is_integer() else x
 
@@ -17,7 +25,8 @@ def calculator(a, b, op):
         "*": lambda x, y: x * y,
         "/": lambda x, y: x / y,
         "%": lambda x, y: x % y,
-        "//": lambda x, y: x // y
+        "//": lambda x, y: x // y,
+        "**": lambda x, y: x ** y
     }
 
     result = operations.get(op, lambda x, y: "\n!Unknown operator")(first_num, last_num)
@@ -27,13 +36,21 @@ def calculator(a, b, op):
     return result
 
 def main():
-    print("=== Python Kalkulator ===")
-    a = input("First Number: ")
-    b = input("Last Number: ")
-    op = input("Select Operation (+, -, *, /, //, %): ")
+    while True:
+        cln_screen()
+        print("===== PYTHON CALCULATOR =====")
+        a = input("First Number: ")
+        b = input("Last Number: ")
+        print("=== Select Operator ===")
+        op = input("+, -, *, **, /, //, %: ")
 
-    result = calculator(a, b, op)
-    print(result)
+        result = calculator(a, b, op)
+        print(result)
+        is_continue = input("\n!Continue? (y/n): ").lower()
+
+        if is_continue == "n":
+            print("\n!Goodbye...")
+            break
 
 if __name__ == "__main__":
     try:
@@ -42,5 +59,4 @@ if __name__ == "__main__":
         print("\n!Goodbye...")
     except Exception as e:
         print("\n!Error: ", e)
-
 
